@@ -58,8 +58,6 @@ Rational& Rational::operator/=(const Rational rhs) {
     return *this;
 }
 
-//îïåðàòîðû ñ ÷èñëàìè
-
 Rational& Rational::operator+=(const int rhs) {
     return Rational(p + rhs*q, q);
 }
