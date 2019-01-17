@@ -28,8 +28,6 @@ bool Rational::operator < (const Rational& rhs) {
     return (p*(del / q) < rhs.p*(del / rhs.q));
 }
 
-//операторы межды двумя рациональными
-
 Rational& Rational::operator+=(const Rational rhs) {
     int del = lcm(q, rhs.q);
     p = p*(del / q) + rhs.p*(del / rhs.q);
@@ -59,8 +57,6 @@ Rational& Rational::operator/=(const Rational rhs) {
     p /= del; q /= del;
     return *this;
 }
-
-//операторы с числами
 
 Rational& Rational::operator+=(const int rhs) {
     return Rational(p + rhs*q, q);
