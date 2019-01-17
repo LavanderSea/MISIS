@@ -1,6 +1,7 @@
 
 #QT += core gui
 QT += quick
+QT += testlib
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -21,12 +22,14 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
     coordinate.cpp \
-    ball.cpp \
     canvas.cpp \
     window.cpp \
-    game.cpp \
-    test.cpp \
-    main.cpp
+    main.cpp \
+    box.cpp \
+    test_canvas.cpp \
+    inmemoryrepository.cpp \
+    leadboard.cpp \
+    test_leadboard.cpp
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
@@ -35,14 +38,18 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 
 HEADERS += \
     coordinate.h \
-    ball.h \
     canvas.h \
     window.h \
-    game.h \
-    test.h
+    box.h \
+    random.h \
+    test_canvas.h \
+    inmemoryrepository.h \
+    leadboard.h \
+    test_leadboard.h
 
 FORMS += \
-    window.ui
+    window.ui \
+    leadboard.ui
 
 DISTFILES += \
     background.jpg \
@@ -53,6 +60,9 @@ DISTFILES += \
     Ellipse-5.png \
     Ellipse-6.png \
     Ellipse-7.png \
-    Ellipse-8.png
+    Ellipse-8.png \
+    Rectangle.png \
+    Ellipse.png \
+    Ellipse.png
 
 RESOURCES +=

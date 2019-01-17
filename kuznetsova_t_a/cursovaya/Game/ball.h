@@ -1,22 +1,37 @@
 #ifndef BALL_H
 #define BALL_H
+
+#include <QImage>
 #include <QString>
 #include <coordinate.h>
-#include <string>
-
 class Ball
 {
 private:
     QString path;
     int colour_type;
-public:    
+public:
     Ball();
-    Ball(int colour_type);
-    void operator = (Ball ball_2);
+    Ball(int clour_type);
+    Ball(const Ball &ball);
+    Ball operator =(Ball &ball_2);
+
+
+
+    void setImage(int colour_type);
+    void setPath(QString path);
+
+
+    //void setCurrentBox(box *box);
+    //box *getCurrentBox() ;
+
+
+    bool getIsPlaced() ;
+    void setIsPlaced(bool value);
+    //QList <box *> moveLocation();
+    //virtual void moves() = 0;
+
     int getColour();
     QString getPath();
-    static Ball Empty();
-    bool isEmpty();
 
 };
 

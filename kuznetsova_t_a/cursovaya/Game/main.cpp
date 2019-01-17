@@ -1,18 +1,22 @@
 #include <QApplication>
 #include "window.h"
 #include "canvas.h"
-#include "test.h"
+#include "test_canvas.h"
+#include "inmemoryrepository.h"
+#include "test_leadboard.h"
 #include <QQmlApplicationEngine>
+#include <QTest>
+
 
 int main(int argc, char *argv[])
 {
   QApplication a(argc, argv);
-  Window w;
-  //w.ShowBall(Test::TestLoadindImage(),Coordinate(0,0));
-  w.show();
+  // Window mainWindow;
+  // mainWindow.setWindowTitle("Lines96");
+  // QPixmap Pixmap;
+  // mainWindow.show();
+// return QTest::qExec(new test_canvas, argc, argv);
+return QTest::qExec(new test_leadboard, argc, argv);
 
-  if (!Test::TestBallCorrectPathReturn()) return -1;
-  if (!Test::TestDeleteBallsMethod()) return -1;
-
-  return a.exec();
+ return a.exec();
 }

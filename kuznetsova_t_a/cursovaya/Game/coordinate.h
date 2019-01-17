@@ -14,14 +14,23 @@ public:
     ~Coordinate();
     void operator =(Coordinate &c);
 
-    bool operator < (Coordinate &c);
+
     bool operator > (Coordinate &c);
+
+    bool operator == (const Coordinate &c);
 
     void operator ++(int);
     void operator --(int);
 
     void operator ++();
     void operator --();
+
+    Coordinate plusX(int);
+    Coordinate plusY(int);
+
 };
+
+bool operator == (const Coordinate &c1,const Coordinate c2);
+bool operator < (const Coordinate &c1,const Coordinate c2);
 
 #endif // COORDINATE_H
