@@ -17,7 +17,7 @@ LeadBoard::~LeadBoard()
     delete ui;
 }
 
-void LeadBoard::UpdateLeaders(int score)
+void LeadBoard::updateLeaders(int score)
 {
     int left = 0;
     int right = countOfLeaders-1;
@@ -56,7 +56,7 @@ void LeadBoard::initializeLabels()
     }
 }
 
-void LeadBoard::Load(QList<int> leaders)
+void LeadBoard::setLeaders(QList<int> leaders)
 {
     if (!isSort(leaders))
     {

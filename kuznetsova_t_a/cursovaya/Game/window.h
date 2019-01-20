@@ -50,11 +50,15 @@ private:
     void initializeScoreLabel();
     void showScore();
     void loadLeadBoard();
+    void loadSaveGame(QString);
+    void setWindowGeometry();
 
     bool eventFilter(QObject *object, QEvent *event);
     Ui::Window *ui;
     LeadBoard *leadBoard;
     Canvas *canvas;
+protected:
+     void closeEvent(QCloseEvent *event);
 };
 
 #endif // WINDOW_H

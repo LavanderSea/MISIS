@@ -16,7 +16,7 @@ Window::Window(QWidget *parent) :
     ui(new Ui::Window)    
 {
     ui->setupUi(this);
-    this->setFixedSize(501,561);
+    setWindowGeometry();
     createCanvas();
     loadLeadBoard();
 
@@ -25,6 +25,9 @@ Window::Window(QWidget *parent) :
     initializeGridLayout();
 
     ui->score->setText("0");
+
+
+    loadSaveGame("../safe_close.txt");
 }
 
 
@@ -67,7 +70,7 @@ void Window::startGame()
 
 void Window::finishGame()
 {
-   leadBoard->UpdateLeaders(canvas->getScore());
+   leadBoard->updateLeaders(canvas->getScore());
     InMemoryRepository::save(leadBoard->getLeaders());
     ui->startGameButton->setText("Start new game");
 }
@@ -116,7 +119,29 @@ void Window::showScore()
 void Window::loadLeadBoard()
 {
     leadBoard = new LeadBoard();
-    leadBoard->Load(InMemoryRepository::loadLeaders());
+    leadBoard->setLeaders(InMemoryRepository::loadLeaders());
+}
+
+void Window::loadSaveGame(QString path)
+{
+    std::array<int, 81> boxes;
+    Canvas loaded = InMemoryRepository::load(path);
+    for (int i=0; i<81; i++)
+    {
+        boxes[i] = *loaded.getBall(i);
+    }
+    canvas = new Canvas(boxes, loaded.getScore());
+    canvas->setEmptyClicked_box();
+    canvas->countOfEmptyBalls();
+    showBoxes();
+    showScore();
+}
+
+void Window::setWindowGeometry()
+{
+    Coordinate c = InMemoryRepository::loadCoordinate();
+    this->setGeometry(c.x, c.y, 501,561);
+    this->setFixedSize(501,561);
 }
 
 bool Window::eventFilter(QObject *object, QEvent *event)
@@ -176,27 +201,26 @@ bool Window::eventFilter(QObject *object, QEvent *event)
     return false;
 }
 
+void Window::closeEvent(QCloseEvent *event)
+{
+    InMemoryRepository::save(*canvas, "../safe_close.txt");
+    Coordinate c(this->geometry().x(), this->geometry().y());
+    InMemoryRepository::save(c);
+
+}
+
 
 
 
 void Window::on_saveGameButton_clicked()
 {
-    InMemoryRepository::save(*canvas);
+    InMemoryRepository::save(*canvas, "../safe.txt");
 }
 
 void Window::on_loadGameButton_clicked()
 {
-    std::array<int, 81> boxes;
-    Canvas loaded = InMemoryRepository::load();
-    for (int i=0; i<81; i++)
-    {
-        boxes[i] = *loaded.getBall(i);
-    }
-    canvas = new Canvas(boxes, loaded.getScore());
-    canvas->setEmptyClicked_box();
-    canvas->countOfEmptyBalls();
-    showBoxes();
-    showScore();
+    loadSaveGame("../safe.txt");
+
 }
 
 void Window::on_leadBoardButton_clicked()
