@@ -29,7 +29,7 @@ public:
     void operator = (Canvas canvas_2);
     int Score();
     bool moveBall(Coordinate before_c, Coordinate after_c, int colour); //проверяет можно ли подвинуть шарик(есть ли путь), если да, то двигает
-    void AddPoints(int count);
+    void AddPoints(int count); // расчитывает и добавляет очки по формуле
 
     void DeleteBall(int x, int y);
     void DeleteBall(Coordinate c);
@@ -49,11 +49,11 @@ public:
     int Index(Coordinate coordinate);
     Coordinate ParseIndex(int index);
 
-    QList<int> Bfs(Coordinate start, Coordinate finish);
+    QList<int> Bfs(Coordinate start, Coordinate finish); //алгоритм поиска в ширину
 
-    bool GenerateRandomBalls();    
+    bool GenerateRandomBalls();   // генерация случайного цвета шаров на случайных незанятых позициях 
 
-    bool SearchBallsWithTheSameColour(Coordinate balls_coordinate, int colour_type);
+    bool SearchBallsWithTheSameColour(Coordinate balls_coordinate, int colour_type); //поиск комбинаций
 
     QList<int> SearchVertical(Coordinate balls_coordinate,int colour_type);
     QList<int> SearchGorizontal(Coordinate balls_coordinate,int colour_type);
